@@ -1,8 +1,8 @@
-experiment_name:                    first_try_experiment1
+experiment_name:                    experiment1_network
 use_gpu:                            True # did you modify this?
 gpu_id:                             0                    
 seed:                               0
-results_path:                       # if None given, will default to 'results' folder under run.
+results_path:                       # results1: doesn't work
 
 network_simulation: True
 ode_simulation: False
@@ -14,12 +14,12 @@ ode_run:
 task:
   label_task_boundaries:            True    # ? TODO                  
   learner_configuration:            meta                 # meta or continual - specifies whether student has separate heads for each teacher (continual) or not (meta)
-  teacher_configuration:            identical          # feature_rotation, readout_rotation, noisy, independent, overlapping, drifting, trained_mnist, both_rotation (see README)
+  teacher_configuration:            feature_rotation          # feature_rotation, readout_rotation, noisy, independent, overlapping, drifting, trained_mnist, both_rotation (see README)
   num_teachers:                     2                         
   loss_type:                        regression                # classification or regression
 
 training:
-  total_training_steps:             100000 # 30 M
+  total_training_steps:             1000000 # 30 M
   train_batch_size:                 1                         
   learning_rate:                    1        # TODO change here experiment 1/2                                       
   loss_function:                    mse                       # mse, bce
@@ -74,7 +74,7 @@ model:
 
   student:
     teacher_features_copy:                                      # emtpy/None = indpendent of teachers, integer = index of teacher to copy
-    student_hidden_layers:            [2, 2]                       
+    student_hidden_layers:            [2]                     
     student_nonlinearity:             scaled_erf                      
     apply_nonlinearity_on_output:     False
     student_initialisation_std:       0.001                     # std of normal initialisation for student network
@@ -86,7 +86,7 @@ model:
     symmetric_student_initialisation: False                     # identically initialised student hidden units
 
   teachers:
-    teacher_hidden_layers:            [1, 1]                                               
+    teacher_hidden_layers:            [1]                                              
     teacher_nonlinearities:           [scaled_erf, scaled_erf]              # per teacher
     normalise_teachers:               True
     teacher_initialisation_std:       1                         # std of normal initialisation for teacher network
@@ -95,7 +95,7 @@ model:
     teacher_bias_parameters:          False                     # whether or not to have bias parameters on linaer layers (teacher)
     teacher_noises:                   [0.001, 0.001]
     feature_rotation:
-      rotation_magnitude:             0
+      rotation_magnitude:             1
     readout_rotation:
       rotation_magnitude:             3.14159
       feature_copy_percentage:        100
@@ -110,7 +110,7 @@ model:
 curriculum:
   stopping_condition:               switch_steps              # condition on which to switch task (fixed_period, switch_steps, or loss_thresholds)
   
-  switch_steps:                     [30000] # 3 M steps, we change task
+  switch_steps:                     [500000] # 3 M steps, we change task
   fixed_period:                     1                      # period for changing tasks 
   loss_thresholds:                  [0.0001]                  # loss threshold under which teacher is changed
 
