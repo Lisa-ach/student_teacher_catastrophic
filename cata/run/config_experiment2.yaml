@@ -19,7 +19,7 @@ task:
   loss_type:                        regression                # classification or regression
 
 training:
-  total_training_steps:             100000 # 30 M
+  total_training_steps:             50000 # 30 M
   train_batch_size:                 1                         
   learning_rate:                    5        # TODO change here experiment 1/2                                       
   loss_function:                    mse                       # mse, bce
@@ -100,8 +100,8 @@ model:
       rotation_magnitude:             3.14159
       feature_copy_percentage:        100
     both_rotation:
-      feature_rotation_alpha:         0.5
-      readout_rotation_alpha:         0.1
+      feature_rotation_alpha:         1 # fa
+      readout_rotation_alpha:         1 # ra
     node_sharing: # was commented 
       num_shared_nodes:               1 # was commented 
       rotation_magnitude:             1 # was commented 

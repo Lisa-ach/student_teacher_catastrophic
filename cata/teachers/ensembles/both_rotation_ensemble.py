@@ -135,7 +135,9 @@ class BothRotationTeacherEnsemble(base_teacher_ensemble.BaseTeacherEnsemble):
             self_overlap = (
                 torch.mm(unrotated_weights, unrotated_weights.T) / normalisation
             )
-            L = torch.cholesky(self_overlap)
+            #L = torch.cholesky(self_overlap)
+            L = torch.linalg.cholesky(self_overlap + 1e-6 * torch.eye(self_overlap.shape[0]))
+
             orthonormal_weights = torch.mm(torch.inverse(L), unrotated_weights)
         else:
             orthonormal_weights = unrotated_weights
