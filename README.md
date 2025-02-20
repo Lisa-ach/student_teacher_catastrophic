@@ -1,3 +1,5 @@
+This repository is based on [student_teacher_catastrophic](https://github.com/seblee97/student_teacher_catastrophic), originally developed as part of an MSc thesis at the University of Oxford by Sebastian Lee. The goal was to replicate the results of the paper *Continual Learning in the Teacher-Student Setup: Impact of Task Similarity*, by Sebastian Lee, Sebastian Gold and Andrew Saxe, that was published in 2021 in the 38th International Conference on Machine Learning.
+
 # Investigating Catastophic Forgetting with Student-Teacher Networks
 
 This repository contains code for a project investigating catastrophic forgetting with 
